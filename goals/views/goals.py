@@ -6,12 +6,12 @@ from goals.models import Goal
 from goals.permissions import GoalPermission
 from goals.serializers import GoalSerializer, GoalWithUserSerializer
 
-
+#вьюха на создание цели
 class GoalCreateView(generics.CreateAPIView):
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = GoalSerializer
 
-
+#вьюха на просмотр списка целей
 class GoalListView(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = GoalWithUserSerializer
@@ -26,7 +26,7 @@ class GoalListView(generics.ListAPIView):
             user=self.request.user, category__is_deleted=False
         ).exclude(status=Goal.Status.archived)
 
-
+#вьюха на просмотр определенной цели
 class GoalDetailView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [GoalPermission]
     serializer_class = GoalWithUserSerializer
