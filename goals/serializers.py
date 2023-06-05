@@ -5,7 +5,7 @@ from rest_framework.exceptions import ValidationError, PermissionDenied
 from core.serializers import UserSerializer
 from goals.models import GoalCategory, Goal, GoalComment
 
-
+# здксь создаем сериализаторы для работы с категориями
 class GoalCategorySerializer(serializers.ModelSerializer):
     user = serializers.HiddenField(default=serializers.CurrentUserDefault())
 
@@ -18,7 +18,7 @@ class GoalCategorySerializer(serializers.ModelSerializer):
 class GoalUserSerializer(GoalCategorySerializer):
     user = UserSerializer(read_only=True)
 
-
+# здесь создаем сериализаторы для работы с целями
 class GoalSerializer(serializers.ModelSerializer):
     user = serializers.HiddenField(default=serializers.CurrentUserDefault())
 
@@ -38,7 +38,7 @@ class GoalSerializer(serializers.ModelSerializer):
 class GoalWithUserSerializer(GoalSerializer):
     user = UserSerializer(read_only=True)
 
-
+# здесь создаем сериализаторы для работы с комментариями
 class GoalCommentSerializer(serializers.ModelSerializer):
     user = serializers.HiddenField(default=serializers.CurrentUserDefault())
 
