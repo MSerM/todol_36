@@ -5,12 +5,12 @@ from goals.models import GoalCategory, Goal
 from goals.permissions import GoalCategoryPermission
 from goals.serializers import GoalCategorySerializer, GoalUserSerializer
 
-
+# вьюха на создание категории
 class GoalCategoryCreateView(generics.CreateAPIView):
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = GoalCategorySerializer
 
-
+# вьюха на просмотр созданных категорий
 class GoalCategoryListView(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = GoalUserSerializer
@@ -22,7 +22,7 @@ class GoalCategoryListView(generics.ListAPIView):
     def get_queryset(self):
         return GoalCategory.objects.select_related('user').filter(user=self.request.user).exclude(is_deleted=True)
 
-
+# вьюха на просмотр определенной категории
 class GoalCategoryDetailView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [GoalCategoryPermission]
     serializer_class = GoalUserSerializer
